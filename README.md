@@ -1,4 +1,6 @@
 # database
 Spotify like musing streaming service database
 
-![bdmusic](https://github.com/user-attachments/assets/5d1520d7-464f-4bc4-9771-78b216b7ba33)
+# UML diagram
+![UMLmusicFY](https://github.com/user-attachments/assets/0403de9e-a6cf-42c3-83d4-223cf718bf3e)
+
