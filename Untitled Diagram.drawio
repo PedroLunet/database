@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:133.0) Gecko/20100101 Firefox/133.0" version="24.7.17">
   <diagram name="Page-1" id="qOnNGqMz24hwGzcETxFr">
-    <mxGraphModel dx="2652" dy="2291" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1263" dy="1373" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -62,8 +62,8 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="LYpr6np8xUgFel-0EcRk-36" value="{Complete, Overlaping}" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1">
-          <mxGeometry x="0.5133" y="75" width="160" relative="1" as="geometry">
+        <mxCell id="LYpr6np8xUgFel-0EcRk-36" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;b&gt;{Complete, Overlaping}&lt;/b&gt;&lt;/font&gt;" style="endArrow=block;endSize=16;endFill=0;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry x="0.5133" y="85" width="160" relative="1" as="geometry">
             <mxPoint x="425" y="371" as="sourcePoint" />
             <mxPoint x="425" y="145" as="targetPoint" />
             <Array as="points">
