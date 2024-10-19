@@ -2,5 +2,6 @@
 Spotify like musing streaming service database
 
 # UML diagram
-![UMLmusicFY](https://github.com/user-attachments/assets/0403de9e-a6cf-42c3-83d4-223cf718bf3e)
+![image](https://github.com/user-attachments/assets/f57c85a8-053e-4c06-8f65-4ff23e89001a)
+
 
