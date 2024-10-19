@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:133.0) Gecko/20100101 Firefox/133.0" version="24.8.0">
   <diagram name="Page-1" id="qOnNGqMz24hwGzcETxFr">
-    <mxGraphModel dx="4245" dy="1303" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="4615" dy="1303" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -430,10 +430,13 @@
           <mxGeometry x="440" y="646" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="LYpr6np8xUgFel-0EcRk-172" value="Ouviu" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="690" y="590" width="160" height="56" as="geometry" />
+          <mxGeometry x="690" y="575" width="160" height="86" as="geometry" />
         </mxCell>
         <mxCell id="LYpr6np8xUgFel-0EcRk-173" value="+ timeStamp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=13;" parent="LYpr6np8xUgFel-0EcRk-172" vertex="1">
           <mxGeometry y="26" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="7EQioC66Jk_MJ72lr7w4-21" value="+ progressoEpisodio" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=13;" vertex="1" parent="LYpr6np8xUgFel-0EcRk-172">
+          <mxGeometry y="56" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="LYpr6np8xUgFel-0EcRk-131" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;" parent="1" source="LYpr6np8xUgFel-0EcRk-23" target="LYpr6np8xUgFel-0EcRk-55" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -562,7 +565,7 @@
           <mxGeometry x="590" y="668" width="50" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7EQioC66Jk_MJ72lr7w4-1" value="Ouvintes" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-250" y="463" width="160" height="56" as="geometry" />
+          <mxGeometry x="-235" y="463" width="160" height="56" as="geometry" />
         </mxCell>
         <mxCell id="LYpr6np8xUgFel-0EcRk-30" value="+ numOuvintesMensais" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=13;" parent="7EQioC66Jk_MJ72lr7w4-1" vertex="1">
           <mxGeometry y="26" width="160" height="30" as="geometry" />
