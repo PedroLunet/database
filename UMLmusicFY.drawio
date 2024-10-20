@@ -632,6 +632,9 @@
             <mxPoint x="-3" as="offset" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="XUqvNqtTJHCbnaMkEpj--4" value="gostou" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-65" y="340" width="50" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
