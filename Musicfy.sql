@@ -1,54 +1,57 @@
 
 CREATE TABLE Person
 (
-	userID Unique NUMERIC, 
-	NAME  Text NOT NULL Constraint ,
-    location Text, 
-    profilePic Text, 
-    PRIMARY Key (userID)
+	userID NUMERIC UNIQUE, 
+	NAME  TEXT NOT NULL Constraint ,
+    location TEXT, 
+    profilePic TEXT, 
+    PRIMARY KEY (userID)
 
 );
 CREATE TABLE Artist
 (   
     userID NUMERIC,
-    biography Text,
-    Nextevents Text,
+    biography TEXT,
+    nextEvents TEXT,
     FOREIGN KEY (userID) REFERENCES Person(userID)
 );
 
-create Table user
+CREATE TABLE user
 (
     userID NUMERIC,
     password blob NOT NULL Constraint,
     contact NUMERIC,
-    birthdate blob NOT NULL Constraint,
+    birthdate DATE NOT NULL Constraint,
     FOREIGN KEY (userID) REFERENCES Person(userID)
 
 );
-create Table  PlanoAssinatura();
+CREATE TABLE PlanoAssinatura
+(
 
-create Table Criador
+);
+
+CREATE TABLE Criador
 (
     userID NUMERIC,
-    biography Text,
+    biography TEXT,
     FOREIGN KEY (userID) REFERENCES Person(userID)
 );
 
-create Table Playlist
+CREATE TABLE Playlist
 (
-    playlistID NUMERIC Unique,
-    name Text Not Null Constraint,
+    playlistID NUMERIC UNIQUE,
+    name TEXT NOT NULL Constraint,
     PRIMARY KEY (playlistID)
 );
 
-create Table Music
+CREATE TABLE Music
 (
-    Album Numeric,
-    musicID NUMERIC Unique,
-    name Text,
-    durationSec Numeric,
-    numReproductions Numeric,
-    coverPhoto Text,
+    Album NUMERIC,
+    musicID NUMERIC UNIQUE,
+    name TEXT,
+    durationSec NUMERIC,
+    numReproductions NUMERIC,
+    coverPhoto TEXT,
     PRIMARY Key (musicID),
     FOREIGN KEY (Album) REFERENCES Album(albumid)
 );
@@ -58,7 +61,7 @@ CREATE TABLE Album
 (
     albumID NUMERIC UNIQUE,
     name TEXT,
-    releaseDate TEXT,
+    releaseDate DATE,
     photo TEXT,
     PRIMARY KEY (albumID)
 
@@ -78,7 +81,7 @@ CREATE TABLE Episode
     episodeID NUMERIC UNIQUE NOT NULL,
     name TEXT NOT NULL,
     description TEXT,
-    releaseDate TEXT,
+    releaseDate DATE,
     photo TEXT,
     PRIMARY KEY (episodeID), 
     FOREIGN KEY (Podcast) REFERENCES Podcast(podcastID)
