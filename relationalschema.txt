@@ -17,17 +17,17 @@ OuviuEpisodio (episodioID -> Episodio, userID -> Utilizador, timeStamp, progress
 OuviuMusica (musicaID -> Musica, userID -> Utilizador, timeStamp)
 —-------------------------------------------------------------------------------------------------------------------------
 SeguiuUtilizador (userID1 -> Utilizador, userID2 -> Utilizador)
-SeguiuArtista (userID -> Utilizador, artistID -> Artista)
-SeguiuCriador (userID -> Utilizador, creatorID -> Criador)
+SeguiuArtista (userID -> Utilizador, artistaID -> Artista)
+SeguiuCriador (userID -> Utilizador, criadorID -> Criador)
 
 GostouAlbum (userID -> Utilizador, albumID -> Album)
 GostouEpisodio (userID -> Utilizador, espisodioID -> Episodio)
 GostouMusica (userID -> Utilizador, musicaID -> Musica)
 
 Colaborador (userID -> Utilizador, playlistID -> Playlist)
-Guardou (userID -> Utilizador, playlistID -> Playlist)
+GuardouPlaylist (userID -> Utilizador, playlistID -> Playlist)
 
-ArtistaMusica (userID -> Artista, musicaID -> Musica)
+ArtistaMusica (artistaID -> Artista, musicaID -> Musica)
 MusicaPlaylist (musicaID -> Musica, playlistID -> Playlist)
 MusicaGenero (musicaID -> Musica, generoID -> Genero)
 PodcastGenero (musicaID -> Musica, podcastID -> Podcast)

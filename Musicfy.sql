@@ -176,9 +176,90 @@ CREATE TABLE GostouMusica
 (
     userID INT NOT NULL UNIQUE,
     musicaID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, episodioID)
+    PRIMARY KEY (userID, musicaID)
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
-    FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
+    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
+):
+
+CREATE TABLE Colaborador
+(
+    userID INT NOT NULL UNIQUE,
+    playlistID INT NOT NULL UNIQUE,
+    PRIMARY KEY (userID, playlistID)
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
+):
+
+CREATE TABLE GuardouPlaylist
+(
+    userID INT NOT NULL UNIQUE,
+    playlistID INT NOT NULL UNIQUE,
+    PRIMARY KEY (userID, playlistID)
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
+):
+
+CREATE TABLE ArtistaMusica
+(
+    artistaID INT NOT NULL UNIQUE,
+    musicaID INT NOT NULL UNIQUE,
+    PRIMARY KEY (artistaID, musicaID)
+    FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
+    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
 ):
 
 
+CREATE TABLE MusicaPlaylist
+(
+    musicaID INT NOT NULL UNIQUE,
+    playlistID INT NOT NULL UNIQUE,
+    PRIMARY KEY (musicaID, playlistID)
+    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
+    FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
+):
+
+CREATE TABLE MusicaGenero 
+(
+    musicaID INT NOT NULL UNIQUE,
+    generoID INT NOT NULL UNIQUE,
+    PRIMARY KEY (musicaID, playlistID)
+    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
+    FOREIGN KEY (generoID) REFERENCES Genero(generoID)
+):
+
+CREATE TABLE PodcastGenero
+(
+    podcastID INT NOT NULL UNIQUE,
+    generoID INT NOT NULL UNIQUE,
+    PRIMARY KEY (podcastID, generoID)
+    FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
+    FOREIGN KEY (generoID) REFERENCES Genero(generoID)
+):
+
+CREATE TABLE PodcastEpisodio
+(
+    podcastID INT NOT NULL UNIQUE,
+    episodioID INT NOT NULL UNIQUE,
+    PRIMARY KEY (podcastID, episodioID)
+    FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
+    FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
+):
+
+CREATE TABLE CridorPodcast
+(
+    criadorID INT NOT NULL UNIQUE,
+    podcastID INT NOT NULL UNIQUE,
+    PRIMARY KEY (criadorID, podcastID)
+    FOREIGN KEY (criadorID) REFERENCES Criador(criadorID)
+    FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
+):
+
+CREATE TABLE EpisodioTema
+(
+    episodioID INT NOT NULL UNIQUE,
+    temaID INT NOT NULL UNIQUE,
+    PRIMARY KEY (episodioID, temaID)
+    FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
+    FOREIGN KEY (temaID) REFERENCES Tema(temaID)
+    
+):
