@@ -31,7 +31,7 @@ ArtistaMusica (artistaID -> Artista, musicaID -> Musica)
 MusicaPlaylist (musicaID -> Musica, playlistID -> Playlist)
 MusicaGenero (musicaID -> Musica, generoID -> Genero)
 PodcastGenero (musicaID -> Musica, podcastID -> Podcast)
-PodcastEpisodio ( podcastID -> Podcast, episodioID -> Episodio)
+PodcastEpisodio (podcastID -> Podcast, episodioID -> Episodio)
 CriadorPodcast (userID -> Criador, podcastID -> Podcast)
 EpisodioTema (episodioID -> Episodio, temaID -> Tema)
 

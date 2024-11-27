@@ -1,31 +1,32 @@
 
 CREATE TABLE Pessoa
 (
-	userID INT UNIQUE, 
-	nome TEXT NOT NULL Constraint,
-    localizacao TEXT, 
+	userID INT NOT NULL UNIQUE, 
+	nome VARCHAR(50) NOT NULL,
+    localizacao VARCHAR(50), 
     fotoPerfil TEXT, 
     PRIMARY KEY (userID)
-
 );
+
 CREATE TABLE Artista
 (   
-    artistaID INT,
+    artistaID INT NOT NULL UNIQUE,
     biografia TEXT,
     proximosEventos TEXT,
-    PRIMARY KEY (artistaID)
+    PRIMARY KEY (artistaID),
     FOREIGN KEY (artistaID) REFERENCES Pessoa(userID)
 );
 
 CREATE TABLE Utilizador
 (
-    userID INT,
-    palavrapasse blob NOT NULL Constraint,
-    contacto INT,
-    dataNascimento DATE NOT NULL Constraint,
-    assinaturaID INT NOT NULL,
-    PRIMARY KEY (userID)
-    FOREIGN KEY (userID) REFERENCES Pessoa(userID)
+    userID INT NOT NULL UNIQUE,
+    nomeUtilizador VARCHAR(25) NOT NULL UNIQUE CHECK (nomeUtilizador > 3),
+    palavrapasse VARCHAR(35) NOT NULL CHECK (palavrapasse > 8),
+    contacto INT NOT NULL UNIQUE,
+    dataNascimento DATE NOT NULL,
+    assinaturaID INT NOT NULL UNIQUE,
+    PRIMARY KEY (userID),
+    FOREIGN KEY (userID) REFERENCES Pessoa(userID),
     FOREIGN KEY (assinaturaID) REFERENCES PlanoAssinatura(subscriptionID)
 
 );
@@ -46,7 +47,7 @@ CREATE TABLE Criador
 CREATE TABLE Playlist
 (
     playlistID INT UNIQUE,
-    nome TEXT NOT NULL Constraint,
+    nome VARCHAR() NOT NULL Constraint,
     PRIMARY KEY (playlistID)
 );
 
@@ -54,7 +55,7 @@ CREATE TABLE Musica
 (
     musicaID INT UNIQUE,
     album INT,
-    nome TEXT,
+    nome VARCHAR(),
     duracaoSeg INT,
     numReproducoes INT,
     fotoCapa TEXT,
@@ -65,7 +66,7 @@ CREATE TABLE Musica
 CREATE TABLE Album
 (
     albumID INT NOT NULL UNIQUE,
-    nome TEXT,
+    nome VARCHAR(),
     dataLancamento DATE,
     fotoCapa TEXT,
     PRIMARY KEY (albumID)
@@ -75,7 +76,7 @@ CREATE TABLE Album
 CREATE TABLE Podcast
 (
     podcastID INT UNIQUE NOT NULL,
-    nome TEXT NOT NULL,
+    nome VARCHAR() NOT NULL,
     fotoCapa TEXT,
     PRIMARY KEY (podcastID)
 );
@@ -84,37 +85,37 @@ CREATE TABLE Episodio
 (
     episodioID INT UNIQUE NOT NULL,
     podcast INT,
-    nome TEXT NOT NULL,
+    nome VARCHAR() NOT NULL,
     descricao TEXT,
     dataLancamento DATE,
     duracaoSeg INT CHECK(duracaoSeg > 0),
     PRIMARY KEY (episodioID), 
     FOREIGN KEY (podcast) REFERENCES Podcast(podcastID)
-):
+);
 
 CREATE TABLE Genero
 (
     generoID INT NOT NULL UNIQUE,
-    genero TEXT,
+    genero VARCHAR(),
     PRIMARY KEY (generoID)
-):
+);
 
 CREATE TABLE Tema
 (
     temaID INT NOT NULL UNIQUE,
-    tema TEXT, 
+    tema VARCHAR(), 
     PRIMARY KEY (temaID)
-):
+);
 
 CREATE TABLE OuviuMusica
 (
     musicaID INT NOT NULL UNIQUE,
     userID INT NOT NULL UNIQUE,
     timeStamp TIMESTAMP,
-    PRIMARY KEY (musicaID, userID)
-    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
+    PRIMARY KEY (musicaID, userID),
+    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
-):
+);
 
 CREATE TABLE OuviuEpisodio
 (
@@ -122,144 +123,142 @@ CREATE TABLE OuviuEpisodio
     userID INT NOT NULL UNIQUE,
     timeStamp TIMESTAMP,
     progressoEpisodio TIMESTAMP,
-    PRIMARY KEY (episodioID, userID)
-    FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
+    PRIMARY KEY (episodioID, userID),
+    FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
-):
+);
 
 CREATE TABLE SeguiuUtilizador
 (
     userID1 INT NOT NULL UNIQUE,
     userID2 INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID1, userID2)
-    FOREIGN KEY (userID1) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID1, userID2),
+    FOREIGN KEY (userID1) REFERENCES Utilizador(userID),
     FOREIGN KEY (userID2) REFERENCES Utilizador(userID)
-):
+);
 
 CREATE TABLE SeguiuArtista
 (
     userID INT NOT NULL UNIQUE,
     artistaID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, artistaID)
-    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID, artistaID),
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID),
     FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
-):
+);
 
 CREATE TABLE SeguiuCriador
 (
     userID INT NOT NULL UNIQUE,
     artistaID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, artistaID)
-    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID, artistaID),
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID),
     FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
-):
+);
 
 CREATE TABLE GostouAlbum
 (
     userID INT NOT NULL UNIQUE,
     albumID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, albumID)
-    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID, albumID),
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID),
     FOREIGN KEY (albumID) REFERENCES Album(albumID)
-):
+);
 
 CREATE TABLE GostouEpisodio
 (
     userID INT NOT NULL UNIQUE,
     episodioID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, episodioID)
-    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID, episodioID),
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID),
     FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
-):
+);
 
 CREATE TABLE GostouMusica
 (
     userID INT NOT NULL UNIQUE,
     musicaID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, musicaID)
-    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID, musicaID),
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID),
     FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
-):
+);
 
 CREATE TABLE Colaborador
 (
     userID INT NOT NULL UNIQUE,
     playlistID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, playlistID)
-    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID, playlistID),
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID),
     FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
-):
+);
 
 CREATE TABLE GuardouPlaylist
 (
     userID INT NOT NULL UNIQUE,
     playlistID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, playlistID)
-    FOREIGN KEY (userID) REFERENCES Utilizador(userID)
+    PRIMARY KEY (userID, playlistID),
+    FOREIGN KEY (userID) REFERENCES Utilizador(userID),
     FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
-):
+);
 
 CREATE TABLE ArtistaMusica
 (
     artistaID INT NOT NULL UNIQUE,
     musicaID INT NOT NULL UNIQUE,
-    PRIMARY KEY (artistaID, musicaID)
-    FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
+    PRIMARY KEY (artistaID, musicaID),
+    FOREIGN KEY (artistaID) REFERENCES Artista(artistaID),
     FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
-):
-
+);
 
 CREATE TABLE MusicaPlaylist
 (
     musicaID INT NOT NULL UNIQUE,
     playlistID INT NOT NULL UNIQUE,
-    PRIMARY KEY (musicaID, playlistID)
-    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
+    PRIMARY KEY (musicaID, playlistID),
+    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID),
     FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
-):
+);
 
 CREATE TABLE MusicaGenero 
 (
     musicaID INT NOT NULL UNIQUE,
     generoID INT NOT NULL UNIQUE,
-    PRIMARY KEY (musicaID, playlistID)
-    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
+    PRIMARY KEY (musicaID, playlistID),
+    FOREIGN KEY (musicaID) REFERENCES Musica(musicaID),
     FOREIGN KEY (generoID) REFERENCES Genero(generoID)
-):
+);
 
 CREATE TABLE PodcastGenero
 (
     podcastID INT NOT NULL UNIQUE,
     generoID INT NOT NULL UNIQUE,
-    PRIMARY KEY (podcastID, generoID)
-    FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
+    PRIMARY KEY (podcastID, generoID),
+    FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID),
     FOREIGN KEY (generoID) REFERENCES Genero(generoID)
-):
+);
 
 CREATE TABLE PodcastEpisodio
 (
     podcastID INT NOT NULL UNIQUE,
     episodioID INT NOT NULL UNIQUE,
-    PRIMARY KEY (podcastID, episodioID)
-    FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
+    PRIMARY KEY (podcastID, episodioID),
+    FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID),
     FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
-):
+);
 
 CREATE TABLE CridorPodcast
 (
     criadorID INT NOT NULL UNIQUE,
     podcastID INT NOT NULL UNIQUE,
-    PRIMARY KEY (criadorID, podcastID)
-    FOREIGN KEY (criadorID) REFERENCES Criador(criadorID)
+    PRIMARY KEY (criadorID, podcastID),
+    FOREIGN KEY (criadorID) REFERENCES Criador(criadorID),
     FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
-):
+);
 
 CREATE TABLE EpisodioTema
 (
     episodioID INT NOT NULL UNIQUE,
     temaID INT NOT NULL UNIQUE,
-    PRIMARY KEY (episodioID, temaID)
-    FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
-    FOREIGN KEY (temaID) REFERENCES Tema(temaID)
-    
-):
+    PRIMARY KEY (episodioID, temaID),
+    FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID),
+    FOREIGN KEY (temaID) REFERENCES Tema(temaID) 
+);
