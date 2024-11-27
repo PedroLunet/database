@@ -101,28 +101,28 @@ CREATE TABLE Theme
 
 /*
 Pessoa (userID, nome, localizacao, fotoPerfil)
-Artista (userID -> Pessoa.userID, biografia, proximosEventos)
+Artista (artistID -> Pessoa.userID, biografia, proximosEventos)
 Utilizador (userID -> Pessoa.userID, nomeUtilizador, password, contacto, dataNascimento, assinaturaID -> PlanoAssinatura)
 PlanoAssinatura (assinaturaID, assinatura)
-Criador (userID -> Pessoa.userID, biografia)
+Criador (creatorID -> Pessoa.userID, biografia)
 Playlist (playlistID, nome, descricao, dataCriacao, foto, userID -> Utilizador)
 Musica (musicaID, nome, duracaoSeg, numReproducoes, fotoCapa, albumID -> Album)
 Album (albumID, nome, dataLancamento, foto)
 Podcast (podcastID, nome, foto)
-Episodio (episodioID, nome, descricao, dataLancamento, duracaoSeg, temaID -> Tema)
-Genero (genero)
-Tema (tema)
+Episodio (episodioID, nome, descricao, dataLancamento, duracaoSeg)
+Genero (generoID, genero)
+Tema (temaID, tema)
 —-------------------------------------------------------------------------------------------------------------------------
-OuviuMu (episodioID -> Episodio, userID -> Utilizador, timeStamp, progressoEpisodio )
-OuviuEp (musicaID -> Musica, userID -> Utilizador, timeStamp)
+OuviuMusica (episodioID -> Episodio, userID -> Utilizador, timeStamp, progressoEpisodio )
+OuviuEpisodio (musicaID -> Musica, userID -> Utilizador, timeStamp)
 —-------------------------------------------------------------------------------------------------------------------------
-Seguiu (userID1 -> Utilizador, userID2 -> Utilizador)
-Seguiu (userID -> Utilizador, userID -> Artista)
-Seguiu (userID -> Utilizador, userID -> Criador)
+SeguiuUser (userID1 -> Utilizador, userID2 -> Utilizador)
+SeguiuArtista (userID -> Utilizador, artistID -> Artista)
+SeguiuCriador (userID -> Utilizador, creatorID -> Criador)
 
-Gostou (userID -> Utilizador, albumID -> Album)
-Gostou (userID -> Utilizador, espisodioID -> Episodio)
-Gostou (userID -> Utilizador, musicaID -> Musica)
+GostouAlbum (userID -> Utilizador, albumID -> Album)
+GostouEpisodio (userID -> Utilizador, espisodioID -> Episodio)
+GostouMusica (userID -> Utilizador, musicaID -> Musica)
 
 Colaborador (userID -> Utilizador, playlistID -> Playlist)
 Guardou (userID -> Utilizador, playlistID -> Playlist)
@@ -133,5 +133,6 @@ MusicaGenero (musicaID -> Musica, generoID -> Genero)
 PodcastGenero (musicaID -> Musica, podcastID -> Podcast)
 PodcastEpisodio ( podcastID -> Podcast, episodioID -> Episodio)
 CriadorPodcast (userID -> Criador, podcastID -> Podcast)
+EpisodioTema (episodioID -> Episodio, temaID -> Tema)
 
 */
