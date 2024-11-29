@@ -1,4 +1,4 @@
-
+DROP TABLE IF EXISTS Pessoa;
 CREATE TABLE Pessoa
 (
 	userID INT NOT NULL UNIQUE, 
@@ -8,6 +8,7 @@ CREATE TABLE Pessoa
     PRIMARY KEY (userID)
 );
 
+DROP TABLE IF EXISTS Artista;
 CREATE TABLE Artista
 (   
     artistaID INT NOT NULL UNIQUE,
@@ -17,6 +18,7 @@ CREATE TABLE Artista
     FOREIGN KEY (artistaID) REFERENCES Pessoa(userID)
 );
 
+DROP TABLE IF EXISTS Utilizador;
 CREATE TABLE Utilizador
 (
     userID INT NOT NULL UNIQUE,
@@ -28,8 +30,9 @@ CREATE TABLE Utilizador
     PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES Pessoa(userID),
     FOREIGN KEY (assinaturaID) REFERENCES PlanoAssinatura(subscriptionID)
-
 );
+
+DROP TABLE IF EXISTS PlanoAssinatura;
 CREATE TABLE PlanoAssinatura
 (
     assinaturaID INT NOT NULL UNIQUE,
@@ -37,6 +40,7 @@ CREATE TABLE PlanoAssinatura
     PRIMARY KEY (assinaturaID)
 );
 
+DROP TABLE IF EXISTS Criador;
 CREATE TABLE Criador
 (
     criadorID INT NOT NULL UNIQUE,
@@ -44,6 +48,7 @@ CREATE TABLE Criador
     FOREIGN KEY (criadorID) REFERENCES Pessoa(userID)
 );
 
+DROP TABLE IF EXISTS Playlist;
 CREATE TABLE Playlist
 (
     playlistID INT NOT NULL UNIQUE,
@@ -51,6 +56,7 @@ CREATE TABLE Playlist
     PRIMARY KEY (playlistID)
 );
 
+DROP TABLE IF EXISTS Musica;
 CREATE TABLE Musica
 (
     musicaID INT NOT NULL UNIQUE,
@@ -63,6 +69,7 @@ CREATE TABLE Musica
     FOREIGN KEY (album) REFERENCES Album(albumID)
 );
 
+DROP TABLE IF EXISTS Album;
 CREATE TABLE Album
 (
     albumID INT NOT NULL UNIQUE,
@@ -73,6 +80,7 @@ CREATE TABLE Album
 
 );
 
+DROP TABLE IF EXISTS Podcast;
 CREATE TABLE Podcast
 (
     podcastID INT UNIQUE NOT NULL,
@@ -81,6 +89,7 @@ CREATE TABLE Podcast
     PRIMARY KEY (podcastID)
 );
 
+DROP TABLE IF EXISTS Episodio;
 CREATE TABLE Episodio
 (
     episodioID INT UNIQUE NOT NULL,
@@ -93,6 +102,7 @@ CREATE TABLE Episodio
     FOREIGN KEY (podcast) REFERENCES Podcast(podcastID)
 );
 
+DROP TABLE IF EXISTS Genero;
 CREATE TABLE Genero
 (
     generoID INT NOT NULL UNIQUE,
@@ -100,6 +110,7 @@ CREATE TABLE Genero
     PRIMARY KEY (generoID)
 );
 
+DROP TABLE IF EXISTS Tema;
 CREATE TABLE Tema
 (
     temaID INT NOT NULL UNIQUE,
@@ -107,6 +118,7 @@ CREATE TABLE Tema
     PRIMARY KEY (temaID)
 );
 
+DROP TABLE IF EXISTS OuviuMusica;
 CREATE TABLE OuviuMusica
 (
     musicaID INT NOT NULL UNIQUE,
@@ -117,6 +129,7 @@ CREATE TABLE OuviuMusica
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
 );
 
+DROP TABLE IF EXISTS OuviuEpisodio;
 CREATE TABLE OuviuEpisodio
 (
     episodioID INT NOT NULL UNIQUE,
@@ -128,6 +141,7 @@ CREATE TABLE OuviuEpisodio
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
 );
 
+DROP TABLE IF EXISTS SeguiuUtilizador;
 CREATE TABLE SeguiuUtilizador
 (
     userID1 INT NOT NULL UNIQUE,
@@ -137,6 +151,7 @@ CREATE TABLE SeguiuUtilizador
     FOREIGN KEY (userID2) REFERENCES Utilizador(userID)
 );
 
+DROP TABLE IF EXISTS SeguiuArtista;
 CREATE TABLE SeguiuArtista
 (
     userID INT NOT NULL UNIQUE,
@@ -146,6 +161,7 @@ CREATE TABLE SeguiuArtista
     FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
 );
 
+DROP TABLE IF EXISTS SeguiuCriador;
 CREATE TABLE SeguiuCriador
 (
     userID INT NOT NULL UNIQUE,
@@ -155,6 +171,7 @@ CREATE TABLE SeguiuCriador
     FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
 );
 
+DROP TABLE IF EXISTS GostouAlbum;
 CREATE TABLE GostouAlbum
 (
     userID INT NOT NULL UNIQUE,
@@ -164,6 +181,7 @@ CREATE TABLE GostouAlbum
     FOREIGN KEY (albumID) REFERENCES Album(albumID)
 );
 
+DROP TABLE IF EXISTS GostouEpisodio;
 CREATE TABLE GostouEpisodio
 (
     userID INT NOT NULL UNIQUE,
@@ -173,6 +191,7 @@ CREATE TABLE GostouEpisodio
     FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
 );
 
+DROP TABLE IF EXISTS GostouMusica;
 CREATE TABLE GostouMusica
 (
     userID INT NOT NULL UNIQUE,
@@ -182,6 +201,7 @@ CREATE TABLE GostouMusica
     FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
 );
 
+DROP TABLE IF EXISTS Colaborador;
 CREATE TABLE Colaborador
 (
     userID INT NOT NULL UNIQUE,
@@ -191,6 +211,7 @@ CREATE TABLE Colaborador
     FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
 );
 
+DROP TABLE IF EXISTS GuardouPlaylist;
 CREATE TABLE GuardouPlaylist
 (
     userID INT NOT NULL UNIQUE,
@@ -200,6 +221,7 @@ CREATE TABLE GuardouPlaylist
     FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
 );
 
+DROP TABLE IF EXISTS ArtistaMusica;
 CREATE TABLE ArtistaMusica
 (
     artistaID INT NOT NULL UNIQUE,
@@ -209,6 +231,7 @@ CREATE TABLE ArtistaMusica
     FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
 );
 
+DROP TABLE IF EXISTS MusicaPlaylist;
 CREATE TABLE MusicaPlaylist
 (
     musicaID INT NOT NULL UNIQUE,
@@ -218,6 +241,7 @@ CREATE TABLE MusicaPlaylist
     FOREIGN KEY (playlistID) REFERENCES Playlist(playlistID)
 );
 
+DROP TABLE IF EXISTS MusicaGenero;
 CREATE TABLE MusicaGenero 
 (
     musicaID INT NOT NULL UNIQUE,
@@ -227,6 +251,7 @@ CREATE TABLE MusicaGenero
     FOREIGN KEY (generoID) REFERENCES Genero(generoID)
 );
 
+DROP TABLE IF EXISTS PodcastGenero;
 CREATE TABLE PodcastGenero
 (
     podcastID INT NOT NULL UNIQUE,
@@ -236,6 +261,7 @@ CREATE TABLE PodcastGenero
     FOREIGN KEY (generoID) REFERENCES Genero(generoID)
 );
 
+DROP TABLE IF EXISTS PodcastEpisodio;
 CREATE TABLE PodcastEpisodio
 (
     podcastID INT NOT NULL UNIQUE,
@@ -245,6 +271,7 @@ CREATE TABLE PodcastEpisodio
     FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
 );
 
+DROP TABLE IF EXISTS CridorPodcast;
 CREATE TABLE CridorPodcast
 (
     criadorID INT NOT NULL UNIQUE,
@@ -254,6 +281,7 @@ CREATE TABLE CridorPodcast
     FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
 );
 
+DROP TABLE IF EXISTS EpisodioTema;
 CREATE TABLE EpisodioTema
 (
     episodioID INT NOT NULL UNIQUE,
