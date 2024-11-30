@@ -63,7 +63,7 @@ CREATE TABLE Musica
     album INT NOT NULL,
     nome VARCHAR(75) NOT NULL,
     duracaoSeg INT CHECK(duracaoSeg > 0),
-    numReproducoes INT,
+    numReproducoes INT DEFAULT 0,
     fotoCapa BLOB,
     PRIMARY Key (musicaID),
     FOREIGN KEY (album) REFERENCES Album(albumID)
@@ -135,7 +135,7 @@ CREATE TABLE OuviuEpisodio
     episodioID INT NOT NULL UNIQUE,
     userID INT NOT NULL UNIQUE,
     timeStamp TIMESTAMP NOT NULL,
-    progressoEpisodio TIMESTAMP CHECK(progressoEpisodio <= Episodio.duracaoSeg),
+    progressoEpisodio TIMESTAMP DEFAULT 0 CHECK(progressoEpisodio <= Episodio.duracaoSeg),
     PRIMARY KEY (episodioID, userID),
     FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
