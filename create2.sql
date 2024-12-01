@@ -28,7 +28,7 @@ CREATE TABLE Utilizador
     palavrapasse VARCHAR(35) NOT NULL CHECK (LENGTH(palavrapasse) >= 8),
     contacto INT NOT NULL UNIQUE,
     dataNascimento DATE NOT NULL,
-    assinaturaID INT NOT NULL UNIQUE,
+    assinaturaID INT,
     PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES Pessoa(userID)
     ON DELETE CASCADE
@@ -63,7 +63,7 @@ CREATE TABLE NomeUtilizador
 DROP TABLE IF EXISTS PlanoAssinatura;
 CREATE TABLE PlanoAssinatura
 (
-    assinaturaID INT NOT NULL UNIQUE,
+    assinaturaID INT,
     assinatura VARCHAR(15) NOT NULL,
     PRIMARY KEY (assinaturaID)
 );
@@ -214,12 +214,12 @@ DROP TABLE IF EXISTS SeguiuCriador;
 CREATE TABLE SeguiuCriador
 (
     userID INT NOT NULL UNIQUE,
-    criadorID INT NOT NULL UNIQUE,
+    artistaID INT NOT NULL UNIQUE,
     PRIMARY KEY (userID, artistaID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-    FOREIGN KEY (criadorID) REFERENCES Criador(criadorID)
+    FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
