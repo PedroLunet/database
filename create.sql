@@ -29,7 +29,25 @@ CREATE TABLE Utilizador
     assinaturaID INT NOT NULL UNIQUE,
     PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES Pessoa(userID),
-    FOREIGN KEY (assinaturaID) REFERENCES PlanoAssinatura(subscriptionID)
+    FOREIGN KEY (assinaturaID) REFERENCES PlanoAssinatura(subscriptionID),
+    FOREIGN KEY (contacto) REFERENCES Contacto(contacto)
+    FOREIGN KEY (nomeUtilizador) REFERENCES NomeUtilizador(nomeUtilizador)
+);
+
+DROP TABLE IF EXISTS Contacto;
+CREATE TABLE Contacto
+(
+    contactoID INT NOT NULL UNIQUE,
+    contacto VARCHAR(35) NOT NULL UNIQUE,
+    PRIMARY KEY (contactoID)
+);
+
+DROP TABLE IF EXISTS NomeUtilizador;
+CREATE TABLE NomeUtilizador
+(
+    nomeUtilizadorID INT NOT NULL UNIQUE,
+    nomeUtilizador VARCHAR(25) NOT NULL UNIQUE CHECK (LENGTH(nomeUtilizador) > 3),
+    PRIMARY KEY (nomeUtilizadorID)
 );
 
 DROP TABLE IF EXISTS PlanoAssinatura;
