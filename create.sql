@@ -36,7 +36,7 @@ DROP TABLE IF EXISTS PlanoAssinatura;
 CREATE TABLE PlanoAssinatura
 (
     assinaturaID INT NOT NULL UNIQUE,
-    assinatura INT NOT NULL,
+    assinatura VARCHAR(8) NOT NULL,
     PRIMARY KEY (assinaturaID)
 );
 
