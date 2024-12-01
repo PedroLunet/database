@@ -23,7 +23,7 @@ CREATE TABLE Utilizador
 (
     userID INT NOT NULL UNIQUE,
     nomeUtilizador VARCHAR(25) NOT NULL UNIQUE CHECK (LENGTH(nomeUtilizador) > 3),
-    palavrapasse VARCHAR(35) NOT NULL CHECK (LENGTH(palavrapasse) > 8),
+    palavrapasse VARCHAR(35) NOT NULL CHECK (LENGTH(palavrapasse) >= 8),
     contacto VARCHAR(35) NOT NULL UNIQUE,
     dataNascimento DATE NOT NULL,
     assinaturaID INT NOT NULL UNIQUE,
