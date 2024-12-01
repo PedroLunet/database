@@ -63,7 +63,6 @@ CREATE TABLE Musica
     album INT NOT NULL,
     nome VARCHAR(75) NOT NULL,
     duracaoSeg INT CHECK(duracaoSeg > 0),
-    numReproducoes INT DEFAULT 0,
     fotoCapa BLOB,
     PRIMARY Key (musicaID),
     FOREIGN KEY (album) REFERENCES Album(albumID)
