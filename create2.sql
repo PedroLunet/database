@@ -1,4 +1,35 @@
 DROP TABLE IF EXISTS Pessoa;
+DROP TABLE IF EXISTS Artista;
+DROP TABLE IF EXISTS Utilizador;
+DROP TABLE IF EXISTS Contacto;
+DROP TABLE IF EXISTS NomeUtilizador;
+DROP TABLE IF EXISTS PlanoAssinatura;
+DROP TABLE IF EXISTS Playlist;
+DROP TABLE IF EXISTS Criador;
+DROP TABLE IF EXISTS Musica;
+DROP TABLE IF EXISTS Album;
+DROP TABLE IF EXISTS Podcast;
+DROP TABLE IF EXISTS Episodio;
+DROP TABLE IF EXISTS Genero;
+DROP TABLE IF EXISTS Tema;
+DROP TABLE IF EXISTS OuviuMusica;
+DROP TABLE IF EXISTS OuviuEpisodio;
+DROP TABLE IF EXISTS SeguiuUtilizador;
+DROP TABLE IF EXISTS SeguiuArtista;
+DROP TABLE IF EXISTS SeguiuCriador;
+DROP TABLE IF EXISTS GostouAlbum;
+DROP TABLE IF EXISTS GostouEpisodio;
+DROP TABLE IF EXISTS GostouMusica;
+DROP TABLE IF EXISTS Colaborador;
+DROP TABLE IF EXISTS GuardouPlaylist;
+DROP TABLE IF EXISTS ArtistaMusica;
+DROP TABLE IF EXISTS MusicaPlaylist;
+DROP TABLE IF EXISTS MusicaGenero;
+DROP TABLE IF EXISTS PodcastGenero;
+DROP TABLE IF EXISTS PodcastEpisodio;
+DROP TABLE IF EXISTS CriadorPodcast;
+DROP TABLE IF EXISTS EpisodioTema;
+
 CREATE TABLE Pessoa
 (
 	userID INT NOT NULL UNIQUE, 
@@ -8,7 +39,6 @@ CREATE TABLE Pessoa
     PRIMARY KEY (userID)
 );
 
-DROP TABLE IF EXISTS Artista;
 CREATE TABLE Artista
 (   
     artistaID INT NOT NULL UNIQUE,
@@ -20,7 +50,6 @@ CREATE TABLE Artista
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Utilizador;
 CREATE TABLE Utilizador
 (
     userID INT NOT NULL UNIQUE,
@@ -28,13 +57,13 @@ CREATE TABLE Utilizador
     palavrapasse VARCHAR(35) NOT NULL CHECK (LENGTH(palavrapasse) >= 8),
     contacto INT NOT NULL UNIQUE,
     dataNascimento DATE NOT NULL,
-    assinaturaID INT,
+    assinaturaID INT NOT NULL,
     PRIMARY KEY (userID),
     FOREIGN KEY (userID) REFERENCES Pessoa(userID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-    FOREIGN KEY (assinaturaID) REFERENCES PlanoAssinatura(subscriptionID)
-    ON DELETE SET NULL
+    FOREIGN KEY (assinaturaID) REFERENCES PlanoAssinatura(assinaturaID)
+    ON DELETE SET DEFAULT
     ON UPDATE CASCADE,
     FOREIGN KEY (contacto) REFERENCES Contacto(contactoID)
     ON DELETE SET NULL
@@ -44,7 +73,6 @@ CREATE TABLE Utilizador
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Contacto;
 CREATE TABLE Contacto
 (
     contactoID INT NOT NULL UNIQUE,
@@ -52,7 +80,6 @@ CREATE TABLE Contacto
     PRIMARY KEY (contactoID)
 );
 
-DROP TABLE IF EXISTS NomeUtilizador;
 CREATE TABLE NomeUtilizador
 (
     nomeUtilizadorID INT NOT NULL UNIQUE,
@@ -60,15 +87,13 @@ CREATE TABLE NomeUtilizador
     PRIMARY KEY (nomeUtilizadorID)
 );
 
-DROP TABLE IF EXISTS PlanoAssinatura;
 CREATE TABLE PlanoAssinatura
 (
-    assinaturaID INT,
+    assinaturaID INT DEFAULT 0,
     assinatura VARCHAR(15) NOT NULL,
     PRIMARY KEY (assinaturaID)
 );
 
-DROP TABLE IF EXISTS Criador;
 CREATE TABLE Criador
 (
     criadorID INT NOT NULL UNIQUE,
@@ -79,7 +104,6 @@ CREATE TABLE Criador
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Playlist;
 CREATE TABLE Playlist
 (
     playlistID INT NOT NULL UNIQUE,
@@ -87,7 +111,6 @@ CREATE TABLE Playlist
     PRIMARY KEY (playlistID)
 );
 
-DROP TABLE IF EXISTS Musica;
 CREATE TABLE Musica
 (
     musicaID INT NOT NULL UNIQUE,
@@ -101,7 +124,6 @@ CREATE TABLE Musica
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Album;
 CREATE TABLE Album
 (
     albumID INT NOT NULL UNIQUE,
@@ -111,7 +133,6 @@ CREATE TABLE Album
     PRIMARY KEY (albumID)
 );
 
-DROP TABLE IF EXISTS Podcast;
 CREATE TABLE Podcast
 (
     podcastID INT UNIQUE NOT NULL,
@@ -120,7 +141,6 @@ CREATE TABLE Podcast
     PRIMARY KEY (podcastID)
 );
 
-DROP TABLE IF EXISTS Episodio;
 CREATE TABLE Episodio
 (
     episodioID INT UNIQUE NOT NULL,
@@ -135,7 +155,6 @@ CREATE TABLE Episodio
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Genero;
 CREATE TABLE Genero
 (
     generoID INT NOT NULL UNIQUE,
@@ -143,7 +162,6 @@ CREATE TABLE Genero
     PRIMARY KEY (generoID)
 );
 
-DROP TABLE IF EXISTS Tema;
 CREATE TABLE Tema
 (
     temaID INT NOT NULL UNIQUE,
@@ -151,11 +169,10 @@ CREATE TABLE Tema
     PRIMARY KEY (temaID)
 );
 
-DROP TABLE IF EXISTS OuviuMusica;
 CREATE TABLE OuviuMusica
 (
-    musicaID INT NOT NULL UNIQUE,
-    userID INT NOT NULL UNIQUE,
+    musicaID INT NOT NULL,
+    userID INT NOT NULL ,
     dataHora TIMESTAMP NOT NULL,
     PRIMARY KEY (musicaID, userID),
     FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
@@ -166,13 +183,13 @@ CREATE TABLE OuviuMusica
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS OuviuEpisodio;
 CREATE TABLE OuviuEpisodio
 (
-    episodioID INT NOT NULL UNIQUE,
-    userID INT NOT NULL UNIQUE,
+    episodioID INT NOT NULL,
+    userID INT NOT NULL,
     dataHora TIMESTAMP NOT NULL,
-    progressoEpisodio TIMESTAMP DEFAULT 0 CHECK(progressoEpisodio <= Episodio.duracaoSeg),
+    duracaoSeg INT CHECK(duracaoSeg > 0),
+    progressoEpisodio Int DEFAULT 0 CHECK(progressoEpisodio <= duracaoSeg),
     PRIMARY KEY (episodioID, userID),
     FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
     ON DELETE CASCADE
@@ -180,13 +197,14 @@ CREATE TABLE OuviuEpisodio
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
     ON UPDATE CASCADE
+
+    
 );
 
-DROP TABLE IF EXISTS SeguiuUtilizador;
 CREATE TABLE SeguiuUtilizador
 (
-    seguidor INT NOT NULL UNIQUE,
-    seguido INT NOT NULL UNIQUE,
+    seguidor INT NOT NULL,
+    seguido INT NOT NULL,
     PRIMARY KEY (seguidor, seguido),
     FOREIGN KEY (seguidor) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
@@ -196,11 +214,10 @@ CREATE TABLE SeguiuUtilizador
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS SeguiuArtista;
 CREATE TABLE SeguiuArtista
 (
-    userID INT NOT NULL UNIQUE,
-    artistaID INT NOT NULL UNIQUE,
+    userID INT NOT NULL,
+    artistaID INT NOT NULL,
     PRIMARY KEY (userID, artistaID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
@@ -210,25 +227,23 @@ CREATE TABLE SeguiuArtista
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS SeguiuCriador;
 CREATE TABLE SeguiuCriador
 (
-    userID INT NOT NULL UNIQUE,
-    artistaID INT NOT NULL UNIQUE,
-    PRIMARY KEY (userID, artistaID),
+    userID INT NOT NULL,
+    criadorID INT NOT NULL,
+    PRIMARY KEY (userID, criadorID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-    FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
+    FOREIGN KEY (criadorID) REFERENCES Criador(criadorID)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS GostouAlbum;
 CREATE TABLE GostouAlbum
 (
-    userID INT NOT NULL UNIQUE,
-    albumID INT NOT NULL UNIQUE,
+    userID INT NOT NULL,
+    albumID INT NOT NULL,
     PRIMARY KEY (userID, albumID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
@@ -238,11 +253,10 @@ CREATE TABLE GostouAlbum
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS GostouEpisodio;
 CREATE TABLE GostouEpisodio
 (
-    userID INT NOT NULL UNIQUE,
-    episodioID INT NOT NULL UNIQUE,
+    userID INT NOT NULL,
+    episodioID INT NOT NULL,
     PRIMARY KEY (userID, episodioID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
@@ -252,11 +266,10 @@ CREATE TABLE GostouEpisodio
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS GostouMusica;
 CREATE TABLE GostouMusica
 (
-    userID INT NOT NULL UNIQUE,
-    musicaID INT NOT NULL UNIQUE,
+    userID INT NOT NULL,
+    musicaID INT NOT NULL,
     PRIMARY KEY (userID, musicaID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
@@ -266,11 +279,10 @@ CREATE TABLE GostouMusica
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Colaborador;
 CREATE TABLE Colaborador
 (
-    userID INT NOT NULL UNIQUE,
-    playlistID INT NOT NULL UNIQUE,
+    userID INT NOT NULL,
+    playlistID INT NOT NULL,
     PRIMARY KEY (userID, playlistID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
@@ -280,11 +292,10 @@ CREATE TABLE Colaborador
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS GuardouPlaylist;
 CREATE TABLE GuardouPlaylist
 (
-    userID INT NOT NULL UNIQUE,
-    playlistID INT NOT NULL UNIQUE,
+    userID INT NOT NULL,
+    playlistID INT NOT NULL,
     PRIMARY KEY (userID, playlistID),
     FOREIGN KEY (userID) REFERENCES Utilizador(userID)
     ON DELETE CASCADE
@@ -294,11 +305,10 @@ CREATE TABLE GuardouPlaylist
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS ArtistaMusica;
 CREATE TABLE ArtistaMusica
 (
-    artistaID INT NOT NULL UNIQUE,
-    musicaID INT NOT NULL UNIQUE,
+    artistaID INT NOT NULL,
+    musicaID INT NOT NULL,
     PRIMARY KEY (artistaID, musicaID),
     FOREIGN KEY (artistaID) REFERENCES Artista(artistaID)
     ON DELETE CASCADE
@@ -308,11 +318,10 @@ CREATE TABLE ArtistaMusica
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS MusicaPlaylist;
 CREATE TABLE MusicaPlaylist
 (
-    musicaID INT NOT NULL UNIQUE,
-    playlistID INT NOT NULL UNIQUE,
+    musicaID INT NOT NULL,
+    playlistID INT NOT NULL,
     PRIMARY KEY (musicaID, playlistID),
     FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
     ON DELETE CASCADE
@@ -322,12 +331,11 @@ CREATE TABLE MusicaPlaylist
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS MusicaGenero;
 CREATE TABLE MusicaGenero 
 (
-    musicaID INT NOT NULL UNIQUE,
-    generoID INT NOT NULL UNIQUE,
-    PRIMARY KEY (musicaID, playlistID),
+    musicaID INT NOT NULL,
+    generoID INT NOT NULL,
+    PRIMARY KEY (musicaID, generoID),
     FOREIGN KEY (musicaID) REFERENCES Musica(musicaID)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -336,11 +344,10 @@ CREATE TABLE MusicaGenero
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS PodcastGenero;
 CREATE TABLE PodcastGenero
 (
-    podcastID INT NOT NULL UNIQUE,
-    generoID INT NOT NULL UNIQUE,
+    podcastID INT NOT NULL,
+    generoID INT NOT NULL,
     PRIMARY KEY (podcastID, generoID),
     FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
     ON DELETE CASCADE
@@ -350,11 +357,10 @@ CREATE TABLE PodcastGenero
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS PodcastEpisodio;
 CREATE TABLE PodcastEpisodio
 (
-    podcastID INT NOT NULL UNIQUE,
-    episodioID INT NOT NULL UNIQUE,
+    podcastID INT NOT NULL,
+    episodioID INT NOT NULL,
     PRIMARY KEY (podcastID, episodioID),
     FOREIGN KEY (podcastID) REFERENCES Podcast(podcastID)
     ON DELETE CASCADE
@@ -364,11 +370,10 @@ CREATE TABLE PodcastEpisodio
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS CriadorPodcast;
 CREATE TABLE CriadorPodcast
 (
-    criadorID INT NOT NULL UNIQUE,
-    podcastID INT NOT NULL UNIQUE,
+    criadorID INT NOT NULL,
+    podcastID INT NOT NULL,
     PRIMARY KEY (criadorID, podcastID),
     FOREIGN KEY (criadorID) REFERENCES Criador(criadorID)
     ON DELETE CASCADE
@@ -378,11 +383,10 @@ CREATE TABLE CriadorPodcast
     ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS EpisodioTema;
 CREATE TABLE EpisodioTema
 (
-    episodioID INT NOT NULL UNIQUE,
-    temaID INT NOT NULL UNIQUE,
+    episodioID INT NOT NULL,
+    temaID INT NOT NULL,
     PRIMARY KEY (episodioID, temaID),
     FOREIGN KEY (episodioID) REFERENCES Episodio(episodioID)
     ON DELETE CASCADE
